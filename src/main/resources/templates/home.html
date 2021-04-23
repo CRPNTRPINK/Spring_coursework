@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <table>
+        <caption>Раздел категории</caption>
+        <tr>
+            <th>Название категории</th>
+            <th>Operations</th>
+        </tr>
+        <tr>
+            <td><a th:href="@{/addCategory}">Добавить</a></td>
+        </tr>
+    <div th:each="el : ${category}">
+        <tr>
+            <td><h1 th:text="${el.getName()}"></h1></td>
+            <td><a th:href="'updateCategory/' + ${el.id}" sec:authorize="hasRole('SUPERMAN')">Изменить</a></td>
+            <td><a th:href="'removeCategory/' + ${el.id}" sec:authorize="hasRole('SUPERMAN')">Удалить</a></td>
+        </tr>
+    </div>
+    </table>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div>
+    <form th:action="@{/addCategory}" th:method="post" th:object="${category}">
+        <input type="text" th:field="*{name}" placeholder="Введите название категории">
+        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+        <button type="submit" value="OK">OK</button>
+    </form>
+</div>
+</body>
+</html>
