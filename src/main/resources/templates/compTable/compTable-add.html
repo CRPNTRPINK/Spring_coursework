@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add phone</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:insert="blocks/header :: header"/>
+<div class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Меню добавления телефона</h4>
+    <form class="needs-validation" enctype="multipart/form-data" th:action="@{/addPhone}" th:method="post" th:object="${phone}">
+
+            <input type="hidden" th:field="*{id}">
+            <div class="col-12">
+                <label for="name" class="form-label">Название <span class="text-muted">(модель)</span></label>
+                <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Iphone" required="">
+                <div class="invalid-feedback">
+                    Пожалуйста, введите название.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="os" class="form-label">Операционаня система</label>
+                <input type="text" class="form-control" th:field="*{operatingSystem}" id="os" placeholder="IOS" required="">
+                <div class="invalid-feedback">
+                    Пожалуйста, введите операционную систему.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="charging connector type" class="form-label">Тип зарядного разъема</label>
+                <input type="text" class="form-control" th:field="*{chargingConnectorType}" id="charging connector type" placeholder="Lightning" required="">
+                <div class="invalid-feedback">
+                    Пожалуйста, введите тип зарядного разъема.
+                </div>
+            </div>
+
+        <div class="col-12">
+            <label for="color" class="form-label">Цвет</label>
+            <input type="text" class="form-control" th:field="*{color}" id="color" placeholder="Красный" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите цвет.
+            </div>
+        </div>
+
+            <div class="col-12">
+                <label for="diagonal" class="form-label">Диагональ</label>
+                <input type="text" class="form-control" th:field="*{diagonal}" id="diagonal" placeholder="Диагональ" required="">
+                <div class="invalid-feedback">
+                    Пожалуйста, введите диагональ.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="screen resolution" class="form-label">Разрешение экрана</label>
+                <input type="text" class="form-control" th:field="*{screenResolution}" id="screen resolution" placeholder="320x480" required="">
+                <div class="invalid-feedback">
+                    Пожалуйста, введите разрешение экрана.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="memory size" class="form-label">Объем памяти</label>
+                <input type="text" class="form-control" th:field="*{memorySize}" id="memory size" placeholder="120GB" required="">
+                <div class="invalid-feedback">
+                    Пожалуйста, введите объем памяти.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="ram size" class="form-label">Объем оперативной памяти</label>
+                <input type="text" class="form-control" th:field="*{ramSize}" id="ram size" placeholder="16GB">
+            </div>
+
+        <div class="col-12">
+            <label for="number of processor cores" class="form-label">Количество ядер процессора</label>
+            <input type="text" class="form-control" th:field="*{numberOfProcessorCores}" id="number of processor cores" placeholder="4" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите количество ядер процессора.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="battery type" class="form-label">Тип аккумулятора</label>
+            <input type="text" class="form-control" th:field="*{batteryType}" id="battery type" placeholder="Li-Ion" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите тип аккумулятора.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="battery capacity" class="form-label">Емкость батареи</label>
+            <input type="text" class="form-control" th:field="*{batteryCapacity}" id="battery capacity" placeholder="3110" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите емкость батареи.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="nfc" class="form-label">NFC</label>
+            <input type="text" class="form-control" th:field="*{nfc}" id="nfc" placeholder="Есть" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите есть/нет.
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" id="category" name="category_id">
+                <option th:each="el : ${category}" th:value="${el.id}" th:text="${el.name}"></option>
+            </select>
+
+            <label for="manufacturer" class="form-label">Manufacturer</label>
+            <select class="form-select" id="manufacturer" name="manufacturer_id">
+                <option th:each="el : ${manufacturer}" th:value="${el.id}" th:text="${el.name}"></option>
+            </select>
+            <input type="file" id="image" name="file">
+        </div>
+
+        <hr class="my-4">
+
+        <button class="w-100 btn btn-dark btn-lg" type="submit">Добавить</button>
+    </form>
+</div>
+</body>
+</html>
