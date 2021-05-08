@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>phone info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body{
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .menu {
+            margin-top: 50px;
+            max-width: 100%;
+            height: auto;
+            overflow:hidden;
+            display: block;
+            margin-left: 400px;
+            margin-right: 350px;
+        }
+        .frame{
+            float:left;
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+        }
+        td{
+            border-bottom: 1px solid #7e807f;
+        }
+
+    </style>
+</head>
+<body>
+<div th:insert="blocks/header :: header"/>
+<img th:src="'/img/' + ${product.filename}" width="320" alt="" style="display: block; margin: 0 auto">
+<div class="menu">
+    <div class="frame">
+        <div>
+            <table cellpadding="3px">
+                <tr>
+                    <td><span class="text-muted">Диагональ</span></td>
+                    <td th:text="${product.diagonal}"></td>
+                </tr>
+
+                <tr>
+                    <td><span class="text-muted">Цвет</span></td>
+                    <td th:text="${product.color}"></td>
+                </tr>
+
+                <tr>
+                    <td><span class="text-muted">Операционная система</span></td>
+                    <td th:text="${product.operatingSystem}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="frame">
+        <table cellpadding="3px">
+
+            <tr>
+                <td><span class="text-muted">Семейство процессора</span></td>
+                <td th:text="${product.processorFamily}"></td>
+            </tr>
+
+            <tr>
+                <td><span class="text-muted">Количество ядер процессора</span></td>
+                <td th:text="${product.numberOfProcessorCores}"></td>
+            </tr>
+
+            <tr>
+                <td><span class="text-muted">Название процессора</span></td>
+                <td th:text="${product.processorName}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="menu" style="margin-top: 20px">
+    <div class="frame">
+        <div>
+            <table cellpadding="3px">
+                <tr>
+                    <td><span class="text-muted">Объем оперативной памяти</span></td>
+                    <td th:text="${product.ramSize}"></td>
+                </tr>
+
+                <tr>
+                    <td><span class="text-muted">Тип оперативной памяти</span></td>
+                    <td th:text="${product.ramType}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="frame">
+        <table cellpadding="3px">
+            <tr>
+                <td><span class="text-muted">Разрешение экрана</span></td>
+                <td th:text="${product.screenResolution}"></td>
+            </tr>
+
+            <tr>
+                <td><span class="text-muted">Тип видеокарты</span></td>
+                <td th:text="${product.typeOfVideoCard}"></td>
+            </tr>
+
+            <tr>
+                <td><span class="text-muted">Модель видеокарты</span></td>
+                <td th:text="${product.videoCardModel}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="menu" style="margin-top: 20px">
+    <div class="frame">
+        <div>
+            <table cellpadding="3px">
+                <tr>
+                    <td><span class="text-muted">Тип накопителя</span></td>
+                    <td th:text="${product.driveType}"></td>
+                </tr>
+
+                <tr>
+                    <td><span class="text-muted">Объем накопителя HDD</span></td>
+                    <td th:text="${product.hddStorageCapacity}"></td>
+                </tr>
+
+                <tr>
+                    <td><span class="text-muted">Объем накопителя SSD</span></td>
+                    <td th:text="${product.sddStorageCapacity}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="frame">
+        <table cellpadding="3px">
+            <tr>
+                <td><span class="text-muted">Вес, кг</span></td>
+                <td th:text="${product.weight}"></td>
+            </tr>
+
+            <tr>
+                <td><span class="text-muted">Максимальное время работы, ч</span></td>
+                <td th:text="${product.maxRunningTime}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

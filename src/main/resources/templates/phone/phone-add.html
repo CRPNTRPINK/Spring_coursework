@@ -2,19 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>add table</title>
+    <title>add phone</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div th:insert="blocks/header :: header"/>
 <div class="col-md-7 col-lg-8">
-    <h4 class="mb-3">Меню добавления планшета</h4>
-    <form class="needs-validation" enctype="multipart/form-data" th:action="@{/addCompTable}" th:method="post" th:object="${compTable}">
+    <h4 class="mb-3">Меню добавления телефона</h4>
+    <form class="needs-validation" enctype="multipart/form-data" th:action="@{/addPhone}" th:method="post" th:object="${phone}">
 
             <input type="hidden" th:field="*{id}">
             <div class="col-12">
                 <label for="name" class="form-label">Название <span class="text-muted">(модель)</span></label>
-                <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="IPad" required="">
+                <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Iphone" required="">
                 <div class="invalid-feedback">
                     Пожалуйста, введите название.
                 </div>
@@ -98,8 +98,8 @@
         </div>
 
         <div class="col-12">
-            <label for="stylus" class="form-label">Стилус</label>
-            <input type="text" class="form-control" th:field="*{stylus}" id="stylus" placeholder="Есть" required="">
+            <label for="nfc" class="form-label">NFC</label>
+            <input type="text" class="form-control" th:field="*{nfc}" id="nfc" placeholder="Есть" required="">
             <div class="invalid-feedback">
                 Пожалуйста, введите есть/нет.
             </div>

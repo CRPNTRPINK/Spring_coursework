@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Обо мне</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="text-white bg-dark">
+    <div th:insert="blocks/header :: header"/>
+    <div class="text-center cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <main class="px-3">
+            <h1 th:text="${lastName} + ' ' + ${firstName}"></h1>
+            <p class="lead"><h1 th:text="${group}"></h1></p>
+        </main>
+    </div>
+</body>

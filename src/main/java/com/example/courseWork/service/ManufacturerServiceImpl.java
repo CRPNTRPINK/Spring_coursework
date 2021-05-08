@@ -1,7 +1,7 @@
 package com.example.courseWork.service;
 
-import com.example.courseWork.dao.ManufacturerDAO;
 import com.example.courseWork.models.Manufacturer;
+import com.example.courseWork.repo.ManufacturerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,35 +13,35 @@ import java.util.Optional;
 public class ManufacturerServiceImpl implements ManufacturerService{
 
     @Autowired
-    private ManufacturerDAO manufacturerDAO;
+    private ManufacturerRepository manufacturerRepository;
 
     @Override
     @Transactional
     public List<Manufacturer> getAllManufacturer() {
-        return manufacturerDAO.getAllManufacturer();
+        return manufacturerRepository.findAll();
     }
 
     @Override
     @Transactional
     public void addManufacturer(Manufacturer manufacturer) {
-        manufacturerDAO.saveManufacturer(manufacturer);
+        manufacturerRepository.save(manufacturer);
     }
 
     @Override
     @Transactional
     public Optional<Manufacturer> getManufacturer(Long id) {
-        return manufacturerDAO.getManufacturer(id);
+        return manufacturerRepository.findById(id);
     }
 
     @Override
     @Transactional
-    public void removeManufacturer(long id) {
-        manufacturerDAO.removeManufacturer(id);
+    public void removeManufacturer(Long id) {
+        manufacturerRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public boolean existsManufacturer(Long id) {
-        return manufacturerDAO.existsManufacturer(id);
+        return manufacturerRepository.existsById(id);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.courseWork.service;
 
-import com.example.courseWork.dao.CategoryDAO;
+import com.example.courseWork.repo.CategoryRepository;
 import com.example.courseWork.models.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,36 +13,36 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService{
 
     @Autowired
-    private CategoryDAO categoryDAO;
+    private CategoryRepository categoryRepository;
 
     @Override
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     public List<Category> getAllCategories() {
-        return categoryDAO.getAllCategories();
+        return categoryRepository.findAll();
     }
 
     @Override
     @Transactional
     public void addCategory(Category category) {
-        categoryDAO.saveCategory(category);
+        categoryRepository.save(category);
     }
 
     @Override
     @Transactional
     public Optional<Category> getCategory(Long id){
-        return categoryDAO.getCategory(id);
+        return categoryRepository.findById(id);
     }
 
     @Override
     @Transactional
-    public void removeCategory(long id) {
-        categoryDAO.removeCategory(id);
+    public void removeCategory(Long id) {
+        categoryRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public boolean existsCategory(Long id) {
-        return categoryDAO.existsCategory(id);
+        return categoryRepository.existsById(id);
     }
 
 }

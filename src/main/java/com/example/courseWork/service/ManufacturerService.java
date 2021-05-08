@@ -9,6 +9,6 @@ public interface ManufacturerService {
     public List<Manufacturer> getAllManufacturer();
     public void addManufacturer(Manufacturer manufacturer);
     public Optional<Manufacturer> getManufacturer(Long id);
-    public void removeManufacturer(long id);
+    public void removeManufacturer(Long id);
     public boolean existsManufacturer(Long id);
 }

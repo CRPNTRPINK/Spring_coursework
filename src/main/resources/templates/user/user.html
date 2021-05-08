@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-dark">
+<div th:insert="blocks/header :: header"/>
+
+<a href="/addAccount" class="btn btn-outline-secondary my-2 bg-secondary text-light mb-5" style="display: block; margin: 0 auto; width: 200px">Создать аккаунт</a>
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Имя</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="el,iter : ${account}">
+        <th scope="row" th:text="${iter.index + 1}"></th>
+        <td th:text="${el.username}"></td>
+        <td><a th:href="'updateAccount/' + ${el.username}" class="text-warning">Изменить</a></td>
+        <td><a th:href="'deleteAccount/' + ${el.id}" class="text-danger">Удалить</a></td>
+        <td th:if="${el.active == true}"><a th:href="'activeAccount/' + ${el.username}" class="text-danger">Заблокировать</a></td>
+        <td th:if="${el.active == false}"><a th:href="'activeAccount/' + ${el.username}" class="text-success">Разблокировать</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

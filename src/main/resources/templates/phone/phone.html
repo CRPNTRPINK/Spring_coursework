@@ -8,16 +8,18 @@
 </head>
 <body class="bg-light">
 <div th:insert="blocks/header :: header"/>
-<a sec:authorize="hasAuthority('SUPERMAN')" href="/addCompTable" class="btn btn-outline-secondary my-2 bg-secondary text-light" style="display: block; margin: 0 auto; width: 200px">Добавить запись</a>
+<a sec:authorize="hasAuthority('SUPERMAN')" href="/addPhone" class="btn btn-outline-secondary my-2 bg-secondary text-light" style="display: block; margin: 0 auto; width: 200px">Добавить запись</a>
 <div class="album py-5 border border-light">
     <div class="container">
-        <form action="/compTable" method="GET">
+
+        <form action="/phone" method="GET">
             <label for="sort" class="form-label">Производитель</label>
             <select class="form-select" id="sort" name="manufacturer" onchange="this.form.submit()">
                 <option>Выбрать</option>
                 <option th:each="el : ${manufacturer}" th:value="${el.id}" th:text="${el.name}"></option>
             </select>
         </form>
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div th:each="el : ${product}" class="col">
                 <div class="card shadow-sm">
@@ -29,9 +31,9 @@
                         <p class="card-text" th:text="'Объем памяти: ' + ${el.memorySize}"></p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a th:href="'compTableInformation/' + ${el.id}" class="btn btn-sm btn-outline-dark">Перейти</a>
-                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'updateCompTable/' + ${el.id}" class="btn btn-sm btn-outline-dark">Изменить</a>
-                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'removeCompTable/' + ${el.id}" class="btn btn-sm btn-outline-dark">Удалить</a>
+                                <a th:href="'phoneInformation/' + ${el.id}" class="btn btn-sm btn-outline-dark">Перейти</a>
+                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'updatePhone/' + ${el.id}" class="btn btn-sm btn-outline-dark">Изменить</a>
+                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'removePhone/' + ${el.id}" class="btn btn-sm btn-outline-dark">Удалить</a>
                             </div>
                         </div>
                     </div>

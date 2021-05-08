@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/api/phone", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/phone", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PhoneRestController {
 
     @Autowired
@@ -25,8 +25,6 @@ public class PhoneRestController {
     @Autowired
     CategoryService categoryService;
 
-    @Autowired
-    PhoneRepository phoneRepository;
 
     @GetMapping(value = "")
     public ResponseEntity<List<Phone>> getAllPhones(){
@@ -43,20 +41,26 @@ public class PhoneRestController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         Optional<Phone> phone = phoneService.getPhone(id);
-        return new ResponseEntity<Optional<Phone>>(phone, HttpStatus.OK);
+        return new ResponseEntity<>(phone, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/name/{name}")
+    public ResponseEntity<List<Phone>> getPhoneBySegment(@PathVariable String name){
+        List<Phone> phone = phoneService.findBySegmentName(name);
+        return new ResponseEntity<>(phone, HttpStatus.OK);
     }
 
     @PostMapping(value = "")
     public ResponseEntity<?> setPhone(@RequestBody @Valid Phone phone){
-        if (phone.getId() != 0){
+        if (phone.getId() != null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         if (!categoryService.existsCategory(phone.getCategory().getId())){
             return new ResponseEntity<>("Id is not found or phone doesn't exists", HttpStatus.BAD_REQUEST);
         }
-        phone.setId(-1);
-        phoneService.addPhone(phone);
-        return new ResponseEntity<>(phone, HttpStatus.CREATED);
+        phone.setId(-1L);
+        Phone savedPhone = phoneService.addPhone(phone);
+        return new ResponseEntity<>(savedPhone, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "")

@@ -9,25 +9,16 @@
 
 <div th:insert="blocks/header :: header"/>
 <div class="col-md-7 col-lg-8">
-    <h4 class="mb-3">Меню добавления категории</h4>
-    <form class="needs-validation" enctype="multipart/form-data" th:action="@{/addCategory}" th:method="post" th:object="${category}">
+    <h4 class="mb-3">Меню добавления производителя</h4>
+    <form class="needs-validation" th:action="@{/addManufacturer}" th:method="post" th:object="${manufacturer}">
 
         <input type="hidden" th:field="*{id}">
         <div class="col-12">
             <label for="name" class="form-label">Название</label>
-            <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Телефоны">
+            <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Apple">
             <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
             </div>
-        </div>
-
-        <div class="col-12">
-            <label for="link" class="form-label">Ссылка</label>
-            <input type="text" class="form-control" th:field="*{link}" id="link" placeholder="phone" required="">
-            <div class="invalid-feedback">
-                Please enter your shipping address.
-            </div>
-            <input type="file" id="image" name="file" style="margin-top: 5px">
         </div>
         <hr class="my-4">
 

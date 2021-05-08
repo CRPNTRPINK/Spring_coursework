@@ -2,6 +2,7 @@ package com.example.courseWork.configuration;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -54,10 +55,13 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/registration").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/remove**",
+                        "/add**", "/update**", "/account",
+                        "/manufacturer", "/active**", "/statistics").hasAuthority("SUPERMAN")
+                .anyRequest().permitAll()
                 .and().formLogin().permitAll()
                 .and().logout().permitAll()
+                .and().httpBasic()
                 .and().csrf().disable();
     }
 

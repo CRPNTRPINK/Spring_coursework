@@ -8,30 +8,32 @@
 </head>
 <body class="bg-light">
 <div th:insert="blocks/header :: header"/>
-<a sec:authorize="hasAuthority('SUPERMAN')" href="/addCompTable" class="btn btn-outline-secondary my-2 bg-secondary text-light" style="display: block; margin: 0 auto; width: 200px">Добавить запись</a>
+<a sec:authorize="hasAuthority('SUPERMAN')" href="/addNotebook" class="btn btn-outline-secondary my-2 bg-secondary text-light" style="display: block; margin: 0 auto; width: 200px">Добавить запись</a>
 <div class="album py-5 border border-light">
     <div class="container">
-        <form action="/compTable" method="GET">
+
+        <form action="/notebook" method="GET">
             <label for="sort" class="form-label">Производитель</label>
             <select class="form-select" id="sort" name="manufacturer" onchange="this.form.submit()">
                 <option>Выбрать</option>
                 <option th:each="el : ${manufacturer}" th:value="${el.id}" th:text="${el.name}"></option>
             </select>
         </form>
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div th:each="el : ${product}" class="col">
                 <div class="card shadow-sm">
-<!--                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
+                    <!--                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
                     <img class="bd-placeholder-img card-img-top" th:src="'img/' + ${el.filename}" width="250" height="250" alt="">
                     <div class="card-body">
                         <p class="card-text" th:text="'Название: ' + ${el.name}"></p>
-                        <p class="card-text" th:text="'операционная система: ' + ${el.operatingSystem}"></p>
-                        <p class="card-text" th:text="'Объем памяти: ' + ${el.memorySize}"></p>
+                        <p class="card-text" th:text="'процессор: ' + ${el.processorName}"></p>
+                        <p class="card-text" th:text="'Объем памяти оперативной: ' + ${el.ramSize}"></p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a th:href="'compTableInformation/' + ${el.id}" class="btn btn-sm btn-outline-dark">Перейти</a>
-                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'updateCompTable/' + ${el.id}" class="btn btn-sm btn-outline-dark">Изменить</a>
-                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'removeCompTable/' + ${el.id}" class="btn btn-sm btn-outline-dark">Удалить</a>
+                                <a th:href="'notebookInformation/' + ${el.id}" class="btn btn-sm btn-outline-dark">Перейти</a>
+                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'updateNotebook/' + ${el.id}" class="btn btn-sm btn-outline-dark">Изменить</a>
+                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'removeNotebook/' + ${el.id}" class="btn btn-sm btn-outline-dark">Удалить</a>
                             </div>
                         </div>
                     </div>

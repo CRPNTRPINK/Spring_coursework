@@ -1,5 +1,7 @@
 package com.example.courseWork.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,10 +10,13 @@ public class Notebook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "diagonal")
-    private double diagonal;
+    private String diagonal;
 
     @Column(name = "color")
     private String color;
@@ -37,13 +42,13 @@ public class Notebook {
     @Column(name = "screen_resolution")
     private String screenResolution;
 
-    @Column(name = "type_of_video_card")
+    @Column(name = "type_of_video_card") // встроенная
     private String typeOfVideoCard;
 
     @Column(name = "video_card_model")
     private String videoCardModel;
 
-    @Column(name = "drive_type") // тип накопителя
+    @Column(name = "drive_type") // тип накопителя SSD или HDD
     private String driveType;
 
     @Column(name = "hdd_storage_capacity") // Объем накопителя HDD
@@ -58,6 +63,12 @@ public class Notebook {
     @Column(name = "max_running_time")
     private String maxRunningTime;
 
+    @Column(name = "filename")
+    private String filename;
+
+    @Column(name = "view")
+    private int view;
+
     //    @NotNull(message = "category can't be null")
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "category_id")
@@ -71,7 +82,8 @@ public class Notebook {
     public Notebook() {
     }
 
-    public Notebook(double diagonal, String color, String operatingSystem, String processorFamily, String numberOfProcessorCores, String processorName, String ramSize, String ramType, String screenResolution, String typeOfVideoCard, String videoCardModel, String driveType, String hddStorageCapacity, String sddStorageCapacity, String weight, String maxRunningTime) {
+    public Notebook(String name, String diagonal, String color, String operatingSystem, String processorFamily, String numberOfProcessorCores, String processorName, String ramSize, String ramType, String screenResolution, String typeOfVideoCard, String videoCardModel, String driveType, String hddStorageCapacity, String sddStorageCapacity, String weight, String maxRunningTime, String filename) {
+        this.name = name;
         this.diagonal = diagonal;
         this.color = color;
         this.operatingSystem = operatingSystem;
@@ -88,21 +100,30 @@ public class Notebook {
         this.sddStorageCapacity = sddStorageCapacity;
         this.weight = weight;
         this.maxRunningTime = maxRunningTime;
+        this.filename = filename;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public double getDiagonal() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDiagonal() {
         return diagonal;
     }
 
-    public void setDiagonal(double diagonal) {
+    public void setDiagonal(String diagonal) {
         this.diagonal = diagonal;
     }
 
@@ -226,6 +247,7 @@ public class Notebook {
         this.maxRunningTime = maxRunningTime;
     }
 
+    @JsonIgnore
     public Category getCategory() {
         return category;
     }
@@ -234,11 +256,28 @@ public class Notebook {
         this.category = category;
     }
 
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    @JsonIgnore
     public Manufacturer getManufacturer() {
         return manufacturer;
     }
 
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public int getView() {
+        return view;
+    }
+
+    public void setView(int view) {
+        this.view = view;
     }
 }

@@ -4,24 +4,32 @@
 <head>
     <title>MVC</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-    <table>
-        <caption>Раздел категории</caption>
-        <tr>
-            <th>Название категории</th>
-            <th>Operations</th>
-        </tr>
-        <tr>
-            <td><a th:href="@{/addCategory}">Добавить</a></td>
-        </tr>
-    <div th:each="el : ${category}">
-        <tr>
-            <td><h1 th:text="${el.getName()}"></h1></td>
-            <td><a th:href="'updateCategory/' + ${el.id}" sec:authorize="hasRole('SUPERMAN')">Изменить</a></td>
-            <td><a th:href="'removeCategory/' + ${el.id}" sec:authorize="hasRole('SUPERMAN')">Удалить</a></td>
-        </tr>
+<body class="bg-light">
+<div th:insert="blocks/header :: header"/>
+
+<main class="container">
+    <div th:insert="blocks/footer :: footer"/>
+    <a sec:authorize="hasAuthority('SUPERMAN')" href="/addCategory" class="btn btn-outline-secondary my-2 bg-secondary text-light mb-5" style="display: block; margin: 0 auto; width: 200px">Добавить категорию</a>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div th:each="el : ${category}" class="col">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 th:text="${el.name}" class="my-0 fw-normal"></h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <img th:src="'img/' + ${el.filename}" width="300" height="200" alt="">
+                    </ul>
+                    <a  th:href="'/' + ${el.link}" class="w-100 btn btn-lg btn-outline-dark">Перейти</a>
+                    <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'updateCategory/' + ${el.id}" class="w-100 btn btn-lg btn-outline-dark" style="margin-top: 5px">Изменить</a>
+                    <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'removeCategory/' + ${el.id}" class="w-100 btn btn-lg btn-outline-dark" style="margin-top: 5px">Удалить</a>
+                </div>
+            </div>
+        </div>
     </div>
-    </table>
+
+</main>
 </body>
 </html>

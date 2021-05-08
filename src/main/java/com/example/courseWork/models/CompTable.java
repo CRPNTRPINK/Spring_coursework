@@ -2,16 +2,12 @@ package com.example.courseWork.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-
 
 @Entity
-@Table(name="Phone")
-public class Phone {
+@Table(name = "comp_table")
+public class CompTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -52,38 +48,40 @@ public class Phone {
     @Column(name = "filename")
     private String filename;
 
-    @Column(name="nfc")
-    private String nfc;
+    @Column(name = "stylus")
+    private String stylus;
 
     @Column(name = "view")
     private int view;
 
 
-//    @NotNull(message = "category can't be null")
+    //    @NotNull(message = "category can't be null")
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "category_id")
     private Category category;
-//    @NotNull(message = "manufacturer can't be null")
+
+    //    @NotNull(message = "manufacturer can't be null")
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
-    public Phone() {
+    public CompTable() {
     }
 
-    public Phone(String name, String operatingSystem, String chargingConnectorType, String diagonal, String screenResolution, String memorySize, String ramSize, String numberOfProcessorCores, String batteryType, String batteryCapacity, String filename, String nfc) {
+    public CompTable(String name, String operatingSystem, String chargingConnectorType, String diagonal, String screenResolution, String color, String memorySize, String ramSize, String numberOfProcessorCores, String batteryType, String batteryCapacity, String filename, String stylus) {
         this.name = name;
         this.operatingSystem = operatingSystem;
         ChargingConnectorType = chargingConnectorType;
         Diagonal = diagonal;
         this.screenResolution = screenResolution;
+        this.color = color;
         this.memorySize = memorySize;
         this.ramSize = ramSize;
         this.numberOfProcessorCores = numberOfProcessorCores;
         this.batteryType = batteryType;
         this.batteryCapacity = batteryCapacity;
         this.filename = filename;
-        this.nfc = nfc;
+        this.stylus = stylus;
     }
 
     public Long getId() {
@@ -167,12 +165,12 @@ public class Phone {
         this.batteryCapacity = batteryCapacity;
     }
 
-    public String getNfc() {
-        return nfc;
+    public String getStylus() {
+        return stylus;
     }
 
-    public void setNfc(String nfc) {
-        this.nfc = nfc;
+    public void setStylus(String stylus) {
+        this.stylus = stylus;
     }
 
     public void setDiagonal(String diagonal) {
@@ -199,12 +197,12 @@ public class Phone {
         this.color = color;
     }
 
+
     @JsonIgnore
     public Category getCategory() {
         return category;
     }
 
-    @JsonProperty
     public void setCategory(Category category) {
         this.category = category;
     }

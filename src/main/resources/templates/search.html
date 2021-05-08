@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<div th:insert="blocks/header :: header"/>
+<a href="/addPhone" class="btn btn-primary my-2" style="margin-left: 45%">Добавить запись</a>
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div th:each="el : ${product}" class="col">
+                <div class="card shadow-sm">
+                    <!--                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
+                    <img class="bd-placeholder-img card-img-top" th:src="'img/' + ${el.filename}" width="300" alt="">
+                    <div class="card-body">
+                        <div th:if="${el.category.name == 'Смартфоны'}">
+                            <p class="card-text" th:text="'Название: ' + ${el.name}"></p>
+                            <p class="card-text" th:text="'операционная система: ' + ${el.operatingSystem}"></p>
+                            <p class="card-text" th:text="'Объем памяти: ' + ${el.memorySize}"></p>
+                        </div>
+
+                        <div th:if="${el.category.name == 'Ноутбуки'}">
+                            <p class="card-text" th:text="'Название: ' + ${el.name}"></p>
+                            <p class="card-text" th:text="'процессор: ' + ${el.processorName}"></p>
+                            <p class="card-text" th:text="'Объем памяти оперативной: ' + ${el.ramSize}"></p>
+                        </div>
+
+                        <div th:if="${el.category.name == 'Планшеты'}">
+                            <p class="card-text" th:text="'Название: ' + ${el.name}"></p>
+                            <p class="card-text" th:text="'операционная система: ' + ${el.operatingSystem}"></p>
+                            <p class="card-text" th:text="'Объем памяти: ' + ${el.memorySize}"></p>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group" th:if="${el.category.name} == 'Смартфоны'">
+                                <a th:href="${el.category.link} + 'Information/' + ${el.id}" class="btn btn-sm btn-outline-secondary">Перейти</a>
+                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'updatePhone/' + ${el.id}" class="btn btn-sm btn-outline-secondary">Изменить</a>
+                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'removePhone/' + ${el.id}" class="btn btn-sm btn-outline-dark">Удалить</a>
+                            </div>
+
+                            <div class="btn-group" th:if="${el.category.name} == 'Ноутбуки'">
+                                <a th:href="${el.category.link} + 'Information/' +${el.id}" class="btn btn-sm btn-outline-secondary">Перейти</a>
+                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'updateNotebook/' + ${el.id}" class="btn btn-sm btn-outline-secondary">Изменить</a>
+                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'removeNotebook/' + ${el.id}" class="btn btn-sm btn-outline-dark">Удалить</a>
+                            </div>
+
+                            <div class="btn-group" th:if="${el.category.name} == 'Планшеты'">
+                                <a th:href="${el.category.link} + 'Information/' +${el.id}" class="btn btn-sm btn-outline-secondary">Перейти</a>
+                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'updateCompTable/' + ${el.id}" class="btn btn-sm btn-outline-secondary">Изменить</a>
+                                <a sec:authorize="hasAuthority('SUPERMAN')" th:href="'removeCompTable/' + ${el.id}" class="btn btn-sm btn-outline-dark">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

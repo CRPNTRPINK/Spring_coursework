@@ -9,7 +9,7 @@ import java.util.List;
 public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name="name")
     private String name;
@@ -19,6 +19,9 @@ public class Manufacturer {
 
     @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL)
     private List<Notebook> notebooks;
+
+    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL)
+    private List<CompTable> compTables;
 
     public void addPhoneToManufacturer(Phone phone){
         if (phones == null){
@@ -36,6 +39,14 @@ public class Manufacturer {
         notebook.setManufacturer(this);
     }
 
+    public void addCompTableToManufacturer(CompTable compTable){
+        if (compTables == null){
+            compTables = new ArrayList<>();
+        }
+        compTables.add(compTable);
+        compTable.setManufacturer(this);
+    }
+
     public Manufacturer() {
     }
 
@@ -43,11 +54,11 @@ public class Manufacturer {
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -67,4 +78,7 @@ public class Manufacturer {
         return notebooks;
     }
 
+    public List<CompTable> getCompTables() {
+        return compTables;
+    }
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:insert="blocks/header :: header"/>
+<div class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Создать пользователя</h4>
+    <form class="needs-validation" th:action="@{/addAccount}" th:method="post" th:object="${account}">
+
+        <input type="hidden" th:field="*{id}">
+        <div class="col-12">
+            <label for="name" class="form-label">Имя пользователя</label>
+            <input type="text" class="form-control" th:field="*{username}" id="name" placeholder="agiev" required="">
+            <p style="color: red" th:text="${msg}"></p>
+            <div class="invalid-feedback">
+                Пожалуйста, введите имя пользователя.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="password" class="form-label">Пароль</label>
+            <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="****" required="">
+            <div class="invalid-feedback">
+                Пожалуйста,  введите пароль.
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <label for="role" class="form-label">Роль</label>
+            <select class="form-select" id="role" name="role">
+                <option th:each="el : ${role}" th:value="${el}" th:text="${el}"></option>
+            </select>
+        </div>
+        <hr class="my-4">
+
+        <button class="w-100 btn btn-dark btn-lg" type="submit">Добавить</button>
+    </form>
+</div>
+</body>
+</html>

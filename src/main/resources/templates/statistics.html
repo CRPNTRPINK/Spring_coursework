@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://www.google.com/jsapi"></script>
+    <script th:inline="javascript">
+        results = []
+        category = new XMLHttpRequest()
+        category.open('GET', 'http://localhost:8080/api/category')
+        category.onload = function() {
+            s = category.responseText
+            json = JSON.parse(s)
+            results.push(['Категория', 'Просмотров'])
+            for (let [i, category] of json.entries()){
+                console.log(category)
+                // results[0].push(category.name)
+                results.push({[category.name]: 0})
+                for (let object of category.phones){
+                    results[i + 1][category.name] += object.view
+                }
+                for (let object of category.notebooks){
+                    results[i + 1][category.name] += object.view
+                }
+                for (let object of category.compTables){
+                    results[i + 1][category.name] += object.view
+                }
+            }
+
+            results = results.map(p => {
+                if (Array.isArray(p)){
+                    return p
+                }
+                else if (!Array.isArray(p)) {
+                    console.log(Object.entries(p))
+                    return Object.entries(p)[0]
+                }
+            })
+        };
+        category.send();
+
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(results);
+            var options = {
+                title: 'Кол-во просмотров',
+                is3D: true,
+                pieResidueSliceLabel: 'Остальное',
+                backgroundColor: 'rgb(53, 58, 63)',
+                titleTextStyle: {
+                    color: 'white'
+                },
+                legend: {
+                    textStyle: {color: 'white'}
+                }
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('air'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body class="bg-dark">
+<div th:insert="blocks/header :: header"/>
+<div id="air" style="width: 500px; height: 400px; display: block; margin: 0 auto;"></div>
+</body>
+</html>

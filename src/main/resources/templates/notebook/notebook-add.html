@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add phone</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:insert="blocks/header :: header"/>
+<div class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Меню добавления ноутбука</h4>
+    <form class="needs-validation" enctype="multipart/form-data" th:action="@{/addNotebook}" th:method="post" th:object="${notebook}">
+
+        <input type="hidden" th:field="*{id}">
+        <div class="col-12">
+            <label for="name" class="form-label">Название <span class="text-muted">(модель)</span></label>
+            <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Ноутбук HP 15s-fq2020ur (2X1S9EA)" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите название.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="diagonal" class="form-label">Диагональ</label>
+            <input type="text" class="form-control" th:field="*{diagonal}" id="diagonal" placeholder="15.6" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите диагональ.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="color" class="form-label">Цвет</label>
+            <input type="text" class="form-control" th:field="*{color}" id="color" placeholder="Черный" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите цвет.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="operating_system" class="form-label">Операционная система</label>
+            <input type="text" class="form-control" th:field="*{operatingSystem}" id="operating_system" placeholder="Windows 10" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, название операционной системы.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="processor_family" class="form-label">Семейство процессора</label>
+            <input type="text" class="form-control" th:field="*{processorFamily}" id="processor_family" placeholder="Intel Pentium" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите семейство процессора.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="number of processor cores" class="form-label">Количество ядер процессора</label>
+            <input type="text" class="form-control" th:field="*{numberOfProcessorCores}" id="number of processor cores" placeholder="4" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите количество ядер процессора.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="processor name" class="form-label">Название процессора</label>
+            <input type="text" class="form-control" th:field="*{processorName}" id="processor name" placeholder="Intel Pentium 7505" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите название процессора.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="ram size" class="form-label">Объем оперативной памяти</label>
+            <input type="text" class="form-control" th:field="*{ramSize}" id="ram size" placeholder="16GB">
+            <div class="invalid-feedback">
+                Пожалуйста, введите объем оперативной памяти.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="ram type" class="form-label">Тип оперативной памяти</label>
+            <input type="text" class="form-control" th:field="*{ramType}" id="ram type" placeholder="DDR4" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите тип оперативной памяти.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="screen resolution" class="form-label">Разрешение экрана</label>
+            <input type="text" class="form-control" th:field="*{screenResolution}" id="screen resolution" placeholder="1920x1080" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите разрешение экрана.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="type of videocard" class="form-label">Тип видеокарты</label>
+            <input type="text" class="form-control" th:field="*{typeOfVideoCard}" id="type of videocard" placeholder="Встроенная" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, тип видеокарты.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="videocard model" class="form-label">Модель видеокарты</label>
+            <input type="text" class="form-control" th:field="*{videoCardModel}" id="videocard model" placeholder="UHD Graphics Xe G4 48EUs" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите модель видеокарты.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="drive type" class="form-label">Тип накопителя</label>
+            <input type="text" class="form-control" th:field="*{driveType}" id="drive type" placeholder="SSD" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите тип накопителя.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="hdd storage capacity" class="form-label">Объем накопителя HDD</label>
+            <input type="text" class="form-control" th:field="*{hddStorageCapacity}" id="hdd storage capacity" placeholder="Нет" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите объем накопителя HDD.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="sdd storage capacity" class="form-label">Объем накопителя SSD</label>
+            <input type="text" class="form-control" th:field="*{sddStorageCapacity}" id="sdd storage capacity" placeholder="512GB" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите объем накопителя SSD.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="weight" class="form-label">Вес кг</label>
+            <input type="text" class="form-control" th:field="*{weight}" id="weight" placeholder="1.69" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите вес.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="max running time" class="form-label">Максимальное время работы, ч</label>
+            <input type="text" class="form-control" th:field="*{maxRunningTime}" id="max running time" placeholder="5" required="">
+            <div class="invalid-feedback">
+                Пожалуйста, введите максимальное время работы.
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" id="category" name="category_id">
+                <option th:each="el : ${category}" th:value="${el.id}" th:text="${el.name}"></option>
+            </select>
+
+            <label for="manufacturer" class="form-label">Manufacturer</label>
+            <select class="form-select" id="manufacturer" name="manufacturer_id">
+                <option th:each="el : ${manufacturer}" th:value="${el.id}" th:text="${el.name}"></option>
+            </select>
+            <input type="file" id="image" name="file">
+        </div>
+
+        <hr class="my-4">
+
+        <button class="w-100 btn btn-dark btn-lg" type="submit">Добавить</button>
+    </form>
+</div>
+</body>
+</html>
